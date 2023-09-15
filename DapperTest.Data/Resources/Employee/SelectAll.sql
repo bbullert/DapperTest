@@ -4,4 +4,3 @@ SELECT
     ,[LastName]
     ,[BirthDate]
 FROM [employee].[Employee]
-WHERE Id = @Id

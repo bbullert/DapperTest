@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Configuration;
 
 namespace DapperTest.Data.Repositories
 {
-    internal class Repository
+    public class Repository : IRepository
     {
-        //private readonly IConfiguration configuration;
+        private readonly IConfiguration _configuration;
 
-        //public ProductRepository(IConfiguration configuration)
-        //{
-        //    this.configuration = configuration;
-        //}
+        public Repository(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        public string ConnectionString => _configuration?.GetConnectionString("Default");
     }
 }

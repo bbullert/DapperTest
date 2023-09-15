@@ -1,14 +1,13 @@
 INSERT INTO [employee].[Employee]
 (
-    [Id]
-    ,[FirstName]
+    [FirstName]
     ,[LastName]
     ,[BirthDate]
 ) 
+OUTPUT Inserted.Id
 VALUES 
 (
-    @Id
-    ,@FirstName
+    @FirstName
     ,@LastName
     ,@BirthDate
 )

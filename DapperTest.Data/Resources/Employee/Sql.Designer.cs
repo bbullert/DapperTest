@@ -61,24 +61,116 @@ namespace DapperTest.Data.Resources.Employee {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM [employee].[Employee]
+        ///WHERE Id = @Id
+        ///SELECT @@ROWCOUNT.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE FROM [employee].[Employee]
+        ///WHERE Id IN 
+        ///(
+        ///	SELECT [Value] FROM STRING_SPLIT(@Ids, &apos;;&apos;)
+        ///).
+        /// </summary>
+        public static string DeleteRange {
+            get {
+                return ResourceManager.GetString("DeleteRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to INSERT INTO [employee].[Employee]
-        ///    (
-        ///        [Id]
-        ///        ,[FirstName]
-        ///        ,[LastName]
-        ///        ,[BirthDate]
-        ///    ) 
-        ///    VALUES 
-        ///    (
-        ///        @Id
-        ///        ,@FirstName
-        ///        ,@LastName
-        ///        ,@BirthDate
-        ///    ).
+        ///(
+        ///    [FirstName]
+        ///    ,[LastName]
+        ///    ,[BirthDate]
+        ///) 
+        ///OUTPUT Inserted.Id
+        ///VALUES 
+        ///(
+        ///    @FirstName
+        ///    ,@LastName
+        ///    ,@BirthDate
+        ///)
+        ///.
         /// </summary>
         public static string Insert {
             get {
                 return ResourceManager.GetString("Insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO [employee].[Employee]
+        ///(
+        ///    [FirstName]
+        ///    ,[LastName]
+        ///    ,[BirthDate]
+        ///) 
+        ///OUTPUT Inserted.Id
+        ///SELECT * FROM  
+        ///OPENJSON ( @json )  
+        ///WITH (   
+        ///	[FirstName]     [varchar](50)   &apos;$.FirstName&apos;,
+        ///	[LastName]      [varchar](50)   &apos;$.LastName&apos;,
+        ///	[BirthDate]     [date]          &apos;$.BirthDate&apos;
+        ///) 
+        ///.
+        /// </summary>
+        public static string InsertRange {
+            get {
+                return ResourceManager.GetString("InsertRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to --DECLARE @Id INT = NULL
+        ///--DECLARE @FirstName NVARCHAR(MAX) = NULL
+        ///--DECLARE @LastName NVARCHAR(MAX) = NULL
+        ///--DECLARE @BirthDateFrom DATE = NULL
+        ///--DECLARE @BirthDateTo DATE = NULL
+        ///
+        ///--DECLARE @Page INT = 1
+        ///--DECLARE @PageSize INT = 10
+        ///--DECLARE @SortBy NVARCHAR(MAX) = NULL
+        ///--DECLARE @SortOrder NVARCHAR(MAX) = NULL
+        ///
+        ///SELECT 
+        ///    [Id]
+        ///    ,[FirstName]
+        ///    ,[LastName]
+        ///    ,[BirthDate]
+        ///	,COUNT(*) OVER() TotalRows
+        ///FROM 
+        ///    [employee].[Employee]
+        ///WHERE
+        ///    ( @Id IS NULL OR [Id] = @Id ) AND 
+        ///    [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT 
+        ///    [Id]
+        ///    ,[FirstName]
+        ///    ,[LastName]
+        ///    ,[BirthDate]
+        ///FROM [employee].[Employee]
+        ///WHERE Id = @Id.
+        /// </summary>
+        public static string Select {
+            get {
+                return ResourceManager.GetString("Select", resourceCulture);
             }
         }
         
@@ -90,9 +182,52 @@ namespace DapperTest.Data.Resources.Employee {
         ///    ,[BirthDate]
         ///FROM [employee].[Employee].
         /// </summary>
-        public static string Select {
+        public static string SelectAll {
             get {
-                return ResourceManager.GetString("Select", resourceCulture);
+                return ResourceManager.GetString("SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE [employee].[Employee]
+        ///SET 
+        ///    [FirstName] = @FirstName
+        ///    ,[LastName] = @LastName
+        ///    ,[BirthDate] = @BirthDate
+        ///WHERE Id = @Id
+        ///SELECT @@ROWCOUNT.
+        /// </summary>
+        public static string Update {
+            get {
+                return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MERGE [employee].[Employee] AS T
+        ///USING
+        ///(
+        ///	SELECT * FROM  
+        ///	OPENJSON ( @json )  
+        ///	WITH (   
+        ///		[Id]            [int]           &apos;$.Id&apos;,
+        ///		[FirstName]     [varchar](50)   &apos;$.FirstName&apos;,
+        ///		[LastName]      [varchar](50)   &apos;$.LastName&apos;,
+        ///		[BirthDate]     [date]          &apos;$.BirthDate&apos;
+        ///	) 
+        ///) AS S
+        ///ON T.[Id] = S.[Id]
+        ///WHEN MATCHED 
+        ///	AND T.[FirstName] &lt;&gt; S.[FirstName]
+        ///	OR T.[LastName] &lt;&gt; S.[LastName]
+        ///	OR T.[BirthDate] &lt;&gt; S.[BirthDate]
+        ///	THEN UPDATE SET 
+        ///		T.[FirstName] = S.[FirstName]
+        ///		,T.[LastName] = [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string UpdateOrCreateRange {
+            get {
+                return ResourceManager.GetString("UpdateOrCreateRange", resourceCulture);
             }
         }
     }
